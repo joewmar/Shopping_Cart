@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(!isset($_SESSION['cartCount']) )header("Location: index.php");
+    if(!isset($_SESSION['cartItems']) )header("Location: index.php");
 
 ?>
 

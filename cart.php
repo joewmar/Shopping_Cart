@@ -31,7 +31,7 @@
         <div class="row mt-3">
             <div class="col-12">
                 <div class="table-responsive">
-                    <?php if(isset($_SESSION['cartCount'])): ?>
+                    <?php if(isset($_SESSION['cartItems'])): ?>
 
                         <table class="table table-striped">
                             <thead>

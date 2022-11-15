@@ -2,27 +2,13 @@
     session_start();
     include_once("tempdatabase.php");
     if(!isset($_GET['pid'])) header("Location: index.php");
-    
+    $CarCount = $_SESSION['cartCount'];
     if(isset($_POST['btnConfirm'])){
-        $_SESSION['cartCount'] += 1;
-        $productID = $_GET['pid'];
-        $size = $_POST['radSize'];
-        $quantity = $_POST['inputQTY'];
-        $arrAddCart = array(
-            $productID => array(
-                'size' => $size,
-                'quantity' => $quantity,
-            )
-        );
-
-        $arrPrevCart = $_SESSION['cartItem'];
-        if(iseet($_SESSION['cartItem'])) {
-            $_SESSION['cartItems'] = array_merge($arrAddCart, $arrPrevCart);
-        }
-        else {
-            $_SESSION['cartItems'] = array_merge($arrAddCart);
-        }
-
+        $CarCount++;        
+        $_SESSION['cartItems'][$CarCount]['id'] = $_GET['pid'];
+        $_SESSION['cartItems'][$CarCount]['size'] = $_POST['radSize'];
+        $_SESSION['cartItems'][$CarCount]['qty'] = $_POST['inputQTY'];
+        $_SESSION['cartCount'] = $CarCount;        
         header("Location: confirm.php");
     }
     else if(isset($_POST['btnCancel'])){

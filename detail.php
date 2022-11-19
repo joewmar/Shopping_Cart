@@ -2,7 +2,7 @@
     session_start();
     include_once("tempdatabase.php");
     if(!isset($_GET['pid'])) header("Location: index.php");
-    $CarCount = $_SESSION['cartCount'];
+    
     if(isset($_POST['btnConfirm'])){
         $CarCount++;        
         $_SESSION['cartItems'][$CarCount]['id'] = $_GET['pid'];
@@ -35,7 +35,7 @@
             <div class="d-inline float-right ">
                 <a href="cart.php" name="btnCart" class="btn btn-primary btn-sm mt-1">
                     <i class="fa-solid fa-cart-shopping"></i>
-                    Cart <span class="badge badge-light"><?php echo (isset($_SESSION['cartCount']) ? $_SESSION['cartCount']: '0');?></span>
+                    Cart <span class="badge badge-light"><?php echo count($_SESSION['cartItems']);?></span>
                     <span class="sr-only">unread messages</span>
                 </a>
             </div>

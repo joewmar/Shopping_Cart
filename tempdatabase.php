@@ -15,14 +15,14 @@
             'photo2' => "photo2-2.jpg",
         ),
         array(
-            'name' => "Long-sleeved Fit",
+            'name' => "Long-sleeved Motion ",
             'description' => "Maiores consequatur aliquid at, iste labore delectus alias ipsa. Alias, sed veritatis fuga asperiores quasi, ipsum corrupti dolores quis animi inventore tenetur illum! Animi veniam rerum et quisquam vero aliquam, sapiente repudiandae fugiat cumque! Ducimus",
             'price' => "1500",
             'photo1' => "photo3-1.jpg",
             'photo2' => "photo3-2.jpg",
         ),
         array(
-            'name' => "Relaxed Fit Tee",
+            'name' => "Relaxed Fit Tee T-Shirt",
             'description' => "Neque. Maiores odio soluta perspiciatis aut unde eligendi dolor illum eveniet. Alias, sed veritatis fuga asperiores quasi, ipsum corrupti dolores quis animi inventore tenetur illum! Animi veniam rerum et quisquam vero aliquam, sapiente repudiandae fugiat cumque! Ducimus",
             'price' => "480",
             'photo1' => "photo4-1.jpg",

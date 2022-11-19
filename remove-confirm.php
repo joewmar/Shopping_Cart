@@ -1,6 +1,24 @@
 <?php
     session_start();
     include_once("tempdatabase.php");
+
+    if(!isset($_GET['cartno'])) header("Location: cart.php");
+
+
+    $cartNo = $_GET['cartno'];
+    $itemID = $_SESSION['cartItems'][$cartNo]['id'];
+    $itemSize =  $_SESSION['cartItems'][$cartNo ]['size'];
+    $itemQty = $_SESSION['cartItems'][$cartNo ]['qty'];
+
+
+    if(isset($_POST['btnRemove'])){
+        unset($_SESSION['cartItems'][$cartNo]);
+
+        header("Location: cart.php");
+    }
+    else if (isset($_POST['btnCancel'])){
+        header("Location: cart.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +39,7 @@
             <div class="d-inline float-right ">
             <a href="cart.php" name="btnCart" class="btn btn-primary btn-sm mt-1">
                 <i class="fa-solid fa-cart-shopping"></i>
-                Cart <span class="badge badge-light"><?php echo (isset($_SESSION['cartCount']) ? $_SESSION['cartCount']: '0');?></span>
+                Cart <span class="badge badge-light"><?php echo count($_SESSION['cartItems']);?></span>
                 <span class="sr-only">unread messages</span>
             </a>
             </div>
@@ -32,29 +50,31 @@
                 <div class="product-grid2 card">
                     <div class="product-image2">
                         <a href="#">
-                            <img class="pic-1" src="https://www.w3schools.com/bootstrap4/img_avatar4.png">
-                            <img class="pic-2" src="https://www.w3schools.com/bootstrap4/img_avatar3.png">
+                            <img class="pic-1" src="img/<?php echo $arrProducts[$itemID]['photo1']?>">
+                            <img class="pic-2" src="img/<?php echo $arrProducts[$itemID]['photo2']?>">
                         </a>
                     </div>
                 </div>
             </div>
             <div class="col-md-7 col-sm-5 col-12">
-                <h4 class="h4 d-inline py-5">Barong
-                    <span class="badge badge-dark">P599.99</span>
+                <h4 class="h4 d-inline py-5"><?php echo $arrProducts[$itemID]['name']?>
+                    <span class="badge badge-dark">₱ <?php echo $arrProducts[$itemID]['price']?></span>
                 </h4>
-                <p class="mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi delectus autem impedit recusandae iure laudantium nisi voluptatem id cupiditate voluptates labore fugit, minima quasi eligendi quaerat! Ea animi harum non molestias veniam cum est rerum, deleniti eum ullam. Maxime hic nisi debitis consequatur eaque, quaerat dolorum quis labore quia. Doloribus?</p>
+                <p class="mt-3"><?php echo $arrProducts[$itemID]['description']?></p>
                 <hr>
-                <h5>Select Size: XS</h5>
+                <h5>Select Size: <?php echo $itemSize?></h5>
 
                 <hr>
-                <h5>Quantity: 00000</h5>
-                <div class="my-3">
-                    <button class="btn btn-dark">
-                        <i class="fa-solid fa-circle-check"></i>
-                        Confirm Product Remove
-                    </button>
-                    <button class="btn btn-danger">Cancel/Go Back</button>
-                </div>
+                <h5>Quantity: <?php echo $_GET['qt']?></h5>
+                <form action="" method="post">
+                    <div class="my-3">
+                        <button name="btnRemove" class="btn btn-dark">
+                            <i class="fa-solid fa-circle-check"></i>
+                            Confirm Product Remove
+                        </button>
+                        <button name="btnCancel" class="btn btn-danger">Cancel/Go Back</button>
+                    </div>
+                </form>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>

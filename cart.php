@@ -28,7 +28,7 @@
             <div class="d-inline float-right ">
             <a href="cart.php" name="btnCart" class="btn btn-primary btn-sm mt-1">
                 <i class="fa-solid fa-cart-shopping"></i>
-                Cart <span class="badge badge-light"><?php echo count($_SESSION['cartItems'])?></span>
+                Cart <span class="badge badge-light"><?php echo isset($_SESSION['cartItems'])? count($_SESSION['cartItems']): '0' ?></span>
                 <span class="sr-only">unread messages</span>
             </a>
             </div>

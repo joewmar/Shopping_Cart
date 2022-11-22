@@ -8,6 +8,17 @@
     $itemQty = 0;
     $itemTotal = 0;
 
+
+    if(isset($_POST['btnUpdate'])){
+        for($count = 0; $count < $_SESSION['cartCount']; $count++){
+            echo 'for loop here';
+            $_SESSION['cartItems'][$count]['qty'] = $_POST['numQTY' . $count . ''];
+            
+        }
+        echo 'Okay naman yun update';
+
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +39,7 @@
             <div class="d-inline float-right ">
             <a href="cart.php" name="btnCart" class="btn btn-primary btn-sm mt-1">
                 <i class="fa-solid fa-cart-shopping"></i>
-                Cart <span class="badge badge-light"><?php echo isset($_SESSION['cartItems'])? count($_SESSION['cartItems']): '0' ?></span>
+                Cart <span class="badge badge-light"><?php echo count($_SESSION['cartItems'])?></span>
                 <span class="sr-only">unread messages</span>
             </a>
             </div>
@@ -37,7 +48,7 @@
         <div class="row mt-3">
             <div class="col-12">
                 <div class="table-responsive">
-                    <?php if(count($_SESSION['cartItems']) > 0): ?>
+                    <?php if(count($_SESSION['cartItems']) != 0): ?>
 
                         <table class="table table-striped">
                             <thead>
@@ -59,22 +70,13 @@
                                         $itemTotal = $arrProducts[$itemID]['price'] * $itemQty;
                                         $amount += $itemTotal;
                                         $itemQTYCount += $itemQty;
-                                        
-                                        // Make a Function next day okay......
-                                        // if(isset($_POST['btnUpdate'])){
-                                        //     // if(isset()){
-                                        //     //     echo 'Hello';
-                                        //     // }
-                                        //     echo 'btnUpdate is <br> ';
-                                        //     echo $_POST['numQTY'][0];
-                                        // }
 
                                 ?>
                                     <tr>
                                         <td><img style="width: 2em" src="./img/<?php echo $arrProducts[$itemID]['photo1']?>"/></td>
                                         <td><?php echo $arrProducts[$itemID]['name']?></td>
                                         <td class="text-center"><?php echo $itemSize;?></td>
-                                        <td class="text-center"><input class="text-center" name="numQTY[]" class="form-control text-center" type="number" min="1" max="100" value="<?php echo $itemQty;?>"></td>
+                                        <td class="text-center"><input class="text-center" name="numQTY<?php echo $CartKey?>" class="form-control text-center" type="number" min="1" max="100" value="<?php echo $itemQty;?>"></td>
                                         <td class="text-center" >₱ <?php echo $arrProducts[$itemID]['price'];?></td>
                                         <td class="text-center">₱ <?php echo $itemTotal;?></td>
                                         <td class="text-center"><a class="btn btn-sm btn-danger" href="remove-confirm.php?cartno=<?php echo $CartKey ;?>&qt=<?php echo $itemQty;?>"><i class="fa fa-trash"></i> </a> </td>

@@ -3,6 +3,7 @@
     include_once("tempdatabase.php");
     if(!isset($_GET['pid'])) header("Location: index.php");
     
+    $CarCount = $_SESSION['cartCount'];
     if(isset($_POST['btnConfirm'])){
         $CarCount++;        
         $_SESSION['cartItems'][$CarCount]['id'] = $_GET['pid'];

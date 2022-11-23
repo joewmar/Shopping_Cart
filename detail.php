@@ -5,11 +5,24 @@
     
     $CarCount = $_SESSION['cartCount'];
     if(isset($_POST['btnConfirm'])){
-        $CarCount++;        
-        $_SESSION['cartItems'][$CarCount]['id'] = $_GET['pid'];
-        $_SESSION['cartItems'][$CarCount]['size'] = $_POST['radSize'];
-        $_SESSION['cartItems'][$CarCount]['qty'] = $_POST['inputQTY'];
-        $_SESSION['cartCount'] = $CarCount;        
+        $isDuplicate = false;
+
+        foreach($_SESSION['cartItems'] as $key => $value){
+            if(in_array($_GET['pid'], $_SESSION['cartItems'][$key]) && in_array($_POST['radSize'], $_SESSION['cartItems'][$key])){
+                $isDuplicate = true;
+                $_SESSION['cartItems'][$CarCount]['qty'] = $_POST['inputQTY'];
+                break;
+            }
+        }
+
+        if($isDuplicate != true){
+            $CarCount++;        
+            $_SESSION['cartItems'][$CarCount]['id'] = $_GET['pid'];
+            $_SESSION['cartItems'][$CarCount]['size'] = $_POST['radSize'];
+            $_SESSION['cartItems'][$CarCount]['qty'] = $_POST['inputQTY'];
+            $_SESSION['cartCount'] = $CarCount;   
+        }
+  
         header("Location: confirm.php");
     }
     else if(isset($_POST['btnCancel'])){
@@ -32,7 +45,7 @@
     <div class="container">
         <!-- Header -->
         <div class="mt-5">
-            <h3 class="h3 d-inline mt-5">Pambansang Damit </h3>
+            <h3 class="h3 d-inline mt-5"><i class="fa-solid fa-shop"></i> Pambansang Damit </h3>
             <div class="d-inline float-right ">
                 <a href="cart.php" name="btnCart" class="btn btn-primary btn-sm mt-1">
                     <i class="fa-solid fa-cart-shopping"></i>

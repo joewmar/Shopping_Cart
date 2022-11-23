@@ -7,7 +7,7 @@
 
     $cartNo = $_GET['cartno'];
     $itemID = $_SESSION['cartItems'][$cartNo]['id'];
-    $itemSize =  $_SESSION['cartItems'][$cartNo ]['size'];
+    $itemSize =  $_SESSION['cartItems'][$cartNo]['size'];
     $itemQty = $_SESSION['cartItems'][$cartNo ]['qty'];
 
 
@@ -35,7 +35,7 @@
     <div class="container">
         <!-- Header -->
         <div class="mt-5">
-            <h3 class="h3 d-inline mt-5">Pambansang Damit </h3>
+            <h3 class="h3 d-inline mt-5"><i class="fa-solid fa-shop"></i> Pambansang Damit </h3>
             <div class="d-inline float-right ">
             <a href="cart.php" name="btnCart" class="btn btn-primary btn-sm mt-1">
                 <i class="fa-solid fa-cart-shopping"></i>
@@ -50,19 +50,19 @@
                 <div class="product-grid2 card">
                     <div class="product-image2">
                         <a href="#">
-                            <img class="pic-1" src="img/<?php echo $arrProducts[$itemID]['photo1']?>">
-                            <img class="pic-2" src="img/<?php echo $arrProducts[$itemID]['photo2']?>">
+                            <img class="pic-1" src="img/<?php echo $arrProducts[$cartNo]['photo1']?>">
+                            <img class="pic-2" src="img/<?php echo $arrProducts[$cartNo]['photo2']?>">
                         </a>
                     </div>
                 </div>
             </div>
             <div class="col-md-7 col-sm-5 col-12">
-                <h4 class="h4 d-inline py-5"><?php echo $arrProducts[$itemID]['name']?>
-                    <span class="badge badge-dark">₱ <?php echo $arrProducts[$itemID]['price']?></span>
+                <h4 class="h4 d-inline py-5"><?php echo $arrProducts[$cartNo]['name']?>
+                    <span class="badge badge-dark">₱ <?php echo $arrProducts[$cartNo]['price']?></span>
                 </h4>
-                <p class="mt-3"><?php echo $arrProducts[$itemID]['description']?></p>
+                <p class="mt-3"><?php echo $arrProducts[$cartNo]['description']?></p>
                 <hr>
-                <h5>Select Size: <?php echo $itemSize?></h5>
+                <h5>Size: <?php echo $itemSize;?></h5>
 
                 <hr>
                 <h5>Quantity: <?php echo $_GET['qt']?></h5>

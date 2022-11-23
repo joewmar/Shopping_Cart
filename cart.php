@@ -9,15 +9,17 @@
     $itemTotal = 0;
 
 
-    if(isset($_POST['btnUpdate'])){
-        for($count = 0; $count < $_SESSION['cartCount']; $count++){
-            echo 'for loop here';
-            $_SESSION['cartItems'][$count]['qty'] = $_POST['numQTY' . $count . ''];
-            
-        }
-        echo 'Okay naman yun update';
+    // if(isset($_POST['btnUpdate'])){
+    //     for($count = 1; $count <= $_SESSION['cartCount']; $count++){
+    //         echo 'for loop here<br>';
+    //         print_r($_POST['numQTY']);
+    //         if(isset($_POST['numQTY'])){
+    //             echo 'yehey';
+    //         }            
+    //     }
+    //     echo 'Okay naman yun update';
 
-    }
+    // }
 
 ?>
 
@@ -35,11 +37,11 @@
 <body>
     <div class="container">
         <div class="mt-5 ">
-            <h3 class="h3 d-inline mt-5">Pambansang Damit </h3>
+            <h3 class="h3 d-inline mt-5"><i class="fa-solid fa-shop"></i> Pambansang Damit </h3>
             <div class="d-inline float-right ">
             <a href="cart.php" name="btnCart" class="btn btn-primary btn-sm mt-1">
                 <i class="fa-solid fa-cart-shopping"></i>
-                Cart <span class="badge badge-light"><?php echo count($_SESSION['cartItems'])?></span>
+                Cart <span class="badge badge-light"><?php echo isset($_SESSION['cartItems'])? count($_SESSION['cartItems']): '0'?></span>
                 <span class="sr-only">unread messages</span>
             </a>
             </div>
@@ -48,7 +50,7 @@
         <div class="row mt-3">
             <div class="col-12">
                 <div class="table-responsive">
-                    <?php if(count($_SESSION['cartItems']) != 0): ?>
+                    <?php if(isset($_SESSION['cartItems']) > 0 && count($_SESSION['cartItems']) != 0):?>
 
                         <table class="table table-striped">
                             <thead>
@@ -66,20 +68,20 @@
                                 <?php foreach($_SESSION['cartItems'] as $CartKey => $CartValue):
                                         $itemID = $_SESSION['cartItems'][$CartKey]['id'];
                                         $itemSize =  $_SESSION['cartItems'][$CartKey]['size'];
+                                        $_SESSION['itemQty'][$CartKey] = $_SESSION['cartItems'][$CartKey]['qty'];
                                         $itemQty = $_SESSION['cartItems'][$CartKey]['qty'];
                                         $itemTotal = $arrProducts[$itemID]['price'] * $itemQty;
                                         $amount += $itemTotal;
                                         $itemQTYCount += $itemQty;
-
                                 ?>
                                     <tr>
                                         <td><img style="width: 2em" src="./img/<?php echo $arrProducts[$itemID]['photo1']?>"/></td>
                                         <td><?php echo $arrProducts[$itemID]['name']?></td>
                                         <td class="text-center"><?php echo $itemSize;?></td>
-                                        <td class="text-center"><input class="text-center" name="numQTY<?php echo $CartKey?>" class="form-control text-center" type="number" min="1" max="100" value="<?php echo $itemQty;?>"></td>
+                                        <td class="text-center"><input class="text-center" name="numQTY[]" class="form-control text-center" type="number" min="1" max="100" value="<?php echo $_SESSION['itemQty'][$CartKey];?>"></td>
                                         <td class="text-center" >₱ <?php echo $arrProducts[$itemID]['price'];?></td>
                                         <td class="text-center">₱ <?php echo $itemTotal;?></td>
-                                        <td class="text-center"><a class="btn btn-sm btn-danger" href="remove-confirm.php?cartno=<?php echo $CartKey ;?>&qt=<?php echo $itemQty;?>"><i class="fa fa-trash"></i> </a> </td>
+                                        <td class="text-center"><a class="btn btn-sm btn-danger" href="remove-confirm.php?cartno=<?php echo $CartKey;?>&qt=<?php echo $itemQty;?>"><i class="fa fa-trash"></i> </a> </td>
                                     </tr>
                                 <?php endforeach;?>
 

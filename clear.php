@@ -1,7 +1,3 @@
-<?php
-    session_start();
-    session_destroy();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,10 +24,10 @@
         <hr>
         <h5>Online Shopping is Successful!!</h5>
         <div class="my-3">
-            <button class="btn btn-danger">
+            <a href="index.php" class="btn btn-danger">
                 <i class="fa-solid fa-bag-shopping"></i>
                 Continue
-            </button>
+            </a>
         </div>    
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

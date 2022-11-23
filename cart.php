@@ -9,17 +9,21 @@
     $itemTotal = 0;
 
 
-    // if(isset($_POST['btnUpdate'])){
-    //     for($count = 1; $count <= $_SESSION['cartCount']; $count++){
-    //         echo 'for loop here<br>';
-    //         print_r($_POST['numQTY']);
-    //         if(isset($_POST['numQTY'])){
-    //             echo 'yehey';
-    //         }            
-    //     }
-    //     echo 'Okay naman yun update';
+    if(isset($_POST['btnUpdate'])){
+        for($count = 1; $count <= $_SESSION['cartCount']; $count++){
+            echo 'for loop here<br>';
+            print_r($_POST['numQTY']);
+            if(isset($_POST['numQTY'])){
+                echo 'yehey';
+            }            
+        }
+        echo 'Okay naman yun update';
 
-    // }
+    }
+    if(isset($_POST['btnCheckout'])){
+        session_destroy();
+        header("Location: clear.php");
+    }
 
 ?>
 
@@ -79,8 +83,8 @@
                                         <td><?php echo $arrProducts[$itemID]['name']?></td>
                                         <td class="text-center"><?php echo $itemSize;?></td>
                                         <td class="text-center"><input class="text-center" name="numQTY[]" class="form-control text-center" type="number" min="1" max="100" value="<?php echo $_SESSION['itemQty'][$CartKey];?>"></td>
-                                        <td class="text-center" >₱ <?php echo $arrProducts[$itemID]['price'];?></td>
-                                        <td class="text-center">₱ <?php echo $itemTotal;?></td>
+                                        <td class="text-center" >₱ <?php echo number_format($arrProducts[$itemID]['price']);?></td>
+                                        <td class="text-center">₱ <?php echo number_format($itemTotal);?></td>
                                         <td class="text-center"><a class="btn btn-sm btn-danger" href="remove-confirm.php?cartno=<?php echo $CartKey;?>&qt=<?php echo $itemQty;?>"><i class="fa fa-trash"></i> </a> </td>
                                     </tr>
                                 <?php endforeach;?>
@@ -91,7 +95,7 @@
                                     <td class="text-center"><strong>Total</strong></td>
                                     <td class="text-center"><?php echo $itemQTYCount;?></td>
                                     <td class="text-center">----</td>
-                                    <td class="text-center"><strong>₱ <?php echo $amount;?></strong></td>
+                                    <td class="text-center"><strong>₱ <?php echo number_format($amount);?></strong></td>
                                     <td class="text-center">----</td>
 
                                 </tr>
@@ -116,10 +120,10 @@
                                 </button>
                             </div>
                             <div class="col-sm-12 col-md-4">
-                                <a href="clear.php" href="clear.php" class="btn btn-lg btn-block btn-info">
+                                <button name="btnCheckout" href="clear.php" class="btn btn-lg btn-block btn-info">
                                     <i class="fa-solid fa-right-to-bracket"></i>
                                     Checkout
-                                </a>
+                                </button>
                             </div>
                         </form>
                     </div>

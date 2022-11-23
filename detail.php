@@ -6,7 +6,7 @@
     $CarCount = $_SESSION['cartCount'];
     if(isset($_POST['btnConfirm'])){
         $isDuplicate = false;
-
+        // Duplication Process
         foreach($_SESSION['cartItems'] as $key => $value){
             if(in_array($_GET['pid'], $_SESSION['cartItems'][$key]) && in_array($_POST['radSize'], $_SESSION['cartItems'][$key])){
                 $isDuplicate = true;

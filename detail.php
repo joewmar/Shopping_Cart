@@ -3,7 +3,7 @@
     include_once("tempdatabase.php");
     if(!isset($_GET['pid'])) header("Location: index.php");
     
-    $CarCount = $_SESSION['cartCount'];
+    $CarCount = (isset($_SESSION['cartCount'])? $_SESSION['cartCount']: " ");
     if(isset($_POST['btnConfirm'])){
         $isDuplicate = false;
         // Duplication Process
@@ -81,7 +81,7 @@
                     </div>
                     <hr>
                     <h5>Enter Quantity:</h5>
-                    <input class="form-control" name="inputQTY" type="number" placeholder="" min="1" max="100" value="1">
+                    <input class="form-control" name="inputQTY" type="number" min="1" max="100" value="1">
                     <div class="my-3">
                         <button name="btnConfirm"class="btn btn-dark">
                             <i class="fa-solid fa-circle-check"></i>

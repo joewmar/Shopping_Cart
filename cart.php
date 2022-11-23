@@ -8,18 +8,13 @@
     $itemQty = 0;
     $itemTotal = 0;
 
-
     if(isset($_POST['btnUpdate'])){
-        for($count = 1; $count <= $_SESSION['cartCount']; $count++){
-            echo 'for loop here<br>';
-            print_r($_POST['numQTY']);
-            if(isset($_POST['numQTY'])){
-                echo 'yehey';
-            }            
+        foreach($_POST['numQTY'] as $key => $value){
+            $cartQTYCount = $key + 1;
+            $_SESSION['cartItems'][$cartQTYCount]['qty'] = $value;
         }
-        echo 'Okay naman yun update';
-
     }
+
     if(isset($_POST['btnCheckout'])){
         session_destroy();
         header("Location: clear.php");
@@ -53,9 +48,9 @@
         <!-- Tables -->
         <div class="row mt-3">
             <div class="col-12">
+            <form action="" method="post">
                 <div class="table-responsive">
                     <?php if(isset($_SESSION['cartItems']) > 0 && count($_SESSION['cartItems']) != 0):?>
-
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -77,18 +72,19 @@
                                         $itemTotal = $arrProducts[$itemID]['price'] * $itemQty;
                                         $amount += $itemTotal;
                                         $itemQTYCount += $itemQty;
+
+
                                 ?>
                                     <tr>
                                         <td><img style="width: 2em" src="./img/<?php echo $arrProducts[$itemID]['photo1']?>"/></td>
                                         <td><?php echo $arrProducts[$itemID]['name']?></td>
                                         <td class="text-center"><?php echo $itemSize;?></td>
-                                        <td class="text-center"><input class="text-center" name="numQTY[]" class="form-control text-center" type="number" min="1" max="100" value="<?php echo $_SESSION['itemQty'][$CartKey];?>"></td>
+                                        <td class="text-center"><input class="text-center" name="numQTY[]" class="form-control text-center" type="number" min="1" max="100" value="<?php echo $itemQty;?>"></td>
                                         <td class="text-center" >₱ <?php echo number_format($arrProducts[$itemID]['price']);?></td>
                                         <td class="text-center">₱ <?php echo number_format($itemTotal);?></td>
                                         <td class="text-center"><a class="btn btn-sm btn-danger" href="remove-confirm.php?cartno=<?php echo $CartKey;?>&qt=<?php echo $itemQty;?>"><i class="fa fa-trash"></i> </a> </td>
                                     </tr>
                                 <?php endforeach;?>
-
                                 <tr>
                                     <td></td>
                                     <td></td>
@@ -97,16 +93,14 @@
                                     <td class="text-center">----</td>
                                     <td class="text-center"><strong>₱ <?php echo number_format($amount);?></strong></td>
                                     <td class="text-center">----</td>
-
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <!-- Footer button -->
-                <div class="col mb-2">
-                    <div class="row">
-                        <form class="form-inline w-100" method="post">
+                    <div class="col mb-2">
+                        <div class="row">
                             <div class="col-sm-12  col-md-4">
                                 <a href="index.php" class="btn btn-block btn-danger">
                                     <i class="fa-solid fa-bag-shopping"></i>
@@ -114,7 +108,7 @@
                                 </a>
                             </div>
                             <div class="col-sm-12 col-md-4">
-                                <button name="btnUpdate" href="cart.php" name ="clickUpdate" class="btn btn-block btn-success">
+                                <button type="submit" href="cart.php?" name="btnUpdate" href="cart.php" name ="clickUpdate" class="btn btn-block btn-success">
                                     <i class="fa-solid fa-pen-to-square"></i>                          
                                     Update Cart
                                 </button>
@@ -125,9 +119,9 @@
                                     Checkout
                                 </button>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
+            </form>
             <?php else: ?> 
                 <table class="table table-striped">
                     <thead>

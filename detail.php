@@ -3,7 +3,7 @@
     include_once("tempdatabase.php");
     if(!isset($_GET['pid'])) header("Location: index.php");
     
-    $CarCount = $_SESSION['cartCount'];
+    $CarCount = (isset($_SESSION['cartCount'])? $_SESSION['cartCount']: " ");
     if(isset($_POST['btnConfirm'])){
         $isDuplicate = false;
         // Duplication Process

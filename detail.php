@@ -81,7 +81,7 @@
                     </div>
                     <hr>
                     <h5>Enter Quantity:</h5>
-                    <input class="form-control" name="inputQTY" type="number" placeholder="" min="1" max="100" value="1">
+                    <input class="form-control" name="inputQTY" type="number" min="1" max="100" value="1">
                     <div class="my-3">
                         <button name="btnConfirm"class="btn btn-dark">
                             <i class="fa-solid fa-circle-check"></i>

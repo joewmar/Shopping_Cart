@@ -1,16 +1,20 @@
 <?php
     session_start();
     include_once("tempdatabase.php");
-    if(!isset($_GET['pid'])) header("Location: index.php");
+    if(!isset($_GET['pid'])) 
+        header("Location: index.php");
     
-    if(isset( $_SESSION['cartCount'])) $CarCount = $_SESSION['cartCount'];
+    if(isset( $_SESSION['cartCount'])) 
+        $CarCount = $_SESSION['cartCount'];
+
     if(isset($_POST['btnConfirm'])){
         $isDuplicate = false;
         // Duplication Process
         foreach($_SESSION['cartItems'] as $key => $value){
-            if(in_array($_GET['pid'], $_SESSION['cartItems'][$key]) && in_array($_POST['radSize'], $_SESSION['cartItems'][$key]) && in_array($_GET['pid'], $_SESSION['cartItems'][$key])){
+            if(in_array($_POST['radSize'], $_SESSION['cartItems'][$key]) && in_array($_GET['pid'], $_SESSION['cartItems'][$key])){
                 $isDuplicate = true;
-                $_SESSION['cartItems'][$CarCount]['qty'] = $_POST['inputQTY'];
+                // I forgot change $CarCount into $key
+                $_SESSION['cartItems'][$key]['qty'] = $_POST['inputQTY'];
                 break;
             }
         }
@@ -22,6 +26,21 @@
             $_SESSION['cartItems'][$CarCount]['qty'] = $_POST['inputQTY'];
             $_SESSION['cartCount'] = $CarCount;   
         }
+        //Analogy of $_SESSION['cartItems'][$CarCount]
+        // $_SESSION = array(
+        //     "cartItems" => array(
+        //         $CarCount1 => $array(
+        //             "id" => $value
+        //             "size" => $value
+        //             "qty" => $value
+        //         ),
+        //         $CarCount2 => $array(
+        //             "id" => $value
+        //             "size" => $value
+        //             "qty" => $value
+        //         ),
+        //     ),
+        // );
   
         header("Location: confirm.php");
     }

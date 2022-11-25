@@ -2,7 +2,8 @@
     session_start();
     include_once("tempdatabase.php");
 
-    if(!isset($_GET['cartno'])) header("Location: cart.php");
+    if(!isset($_GET['cartno'])) 
+        header("Location: cart.php");
 
 
     $cartNo = $_GET['cartno'];
@@ -10,15 +11,13 @@
     $itemSize =  $_SESSION['cartItems'][$cartNo]['size'];
     $itemQty = $_SESSION['cartItems'][$cartNo ]['qty'];
 
-
     if(isset($_POST['btnRemove'])){
         unset($_SESSION['cartItems'][$cartNo]);
-
         header("Location: cart.php");
     }
-    else if (isset($_POST['btnCancel'])){
+    else if (isset($_POST['btnCancel']))
         header("Location: cart.php");
-    }
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,17 +49,17 @@
                 <div class="product-grid2 card">
                     <div class="product-image2">
                         <a href="#">
-                            <img class="pic-1" src="img/<?php echo $arrProducts[$cartNo]['photo1']?>">
-                            <img class="pic-2" src="img/<?php echo $arrProducts[$cartNo]['photo2']?>">
+                            <img class="pic-1" src="img/<?php echo $arrProducts[$itemID]['photo1']?>">
+                            <img class="pic-2" src="img/<?php echo $arrProducts[$itemID]['photo2']?>">
                         </a>
                     </div>
                 </div>
             </div>
             <div class="col-md-7 col-sm-5 col-12">
-                <h4 class="h4 d-inline py-5"><?php echo $arrProducts[$cartNo]['name']?>
-                    <span class="badge badge-dark">₱ <?php echo $arrProducts[$cartNo]['price']?></span>
+                <h4 class="h4 d-inline py-5"><?php echo $arrProducts[$itemID]['name']?>
+                    <span class="badge badge-dark">₱ <?php echo $arrProducts[$itemID]['price']?></span>
                 </h4>
-                <p class="mt-3"><?php echo $arrProducts[$cartNo]['description']?></p>
+                <p class="mt-3"><?php echo $arrProducts[$itemID]['description']?></p>
                 <hr>
                 <h5>Size: <?php echo $itemSize;?></h5>
 

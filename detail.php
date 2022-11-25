@@ -3,15 +3,14 @@
     include_once("tempdatabase.php");
     if(!isset($_GET['pid'])) 
         header("Location: index.php");
-    
-    if(isset( $_SESSION['cartCount'])) 
-        $CarCount = $_SESSION['cartCount'];
 
     if(isset($_POST['btnConfirm'])){
+        $CarCount = $_SESSION['cartCount'];
         $isDuplicate = false;
         // Duplication Process
         foreach($_SESSION['cartItems'] as $key => $value){
-            if(in_array($_POST['radSize'], $_SESSION['cartItems'][$key]) && in_array($_GET['pid'], $_SESSION['cartItems'][$key])){
+            print_r($_SESSION['cartItems']);
+            if($_POST['radSize'] == $_SESSION['cartItems'][$key]['size'] && $_GET['pid'] == $_SESSION['cartItems'][$key]['id']){
                 $isDuplicate = true;
                 // I forgot change $CarCount into $key
                 $_SESSION['cartItems'][$key]['qty'] = $_POST['inputQTY'];
@@ -85,7 +84,7 @@
             </div>
             <div class="col-md-7 col-sm-5 col-12">
                 <h4 class="h4 d-inline py-5"><?php echo $arrProducts[$_GET['pid']]['name'];?>
-                    <span class="badge badge-dark">₱<?php echo $arrProducts[$_GET['pid']]['price'];?></span>
+                    <span class="badge badge-dark">₱ <?php echo $arrProducts[$_GET['pid']]['price'];?></span>
                 </h4>
                 <p class="my-3"><?php echo $arrProducts[$_GET['pid']]['description'];?></p>
                 <hr>

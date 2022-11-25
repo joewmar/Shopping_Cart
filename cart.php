@@ -10,8 +10,7 @@
 
     if(isset($_POST['btnUpdate'])){
         foreach($_POST['numQTY'] as $key => $value){
-            $cartQTYCount = $key + 1;
-            $_SESSION['cartItems'][$cartQTYCount]['qty'] = $value;
+            $_SESSION['cartItems'][$key + 1]['qty'] = $value;
         }
     }
 

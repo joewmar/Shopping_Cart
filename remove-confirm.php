@@ -5,7 +5,9 @@
     if(!isset($_GET['cartno'])) 
         header("Location: cart.php");
 
-
+    if ((isset($_SESSION['cartItems'])? count($_SESSION['cartItems']): '0') === '0'){
+        unset($_SESSION['cartItems']);
+    }
     $cartNo = $_GET['cartno'];
     $itemID = $_SESSION['cartItems'][$cartNo]['id'];
     $itemSize =  $_SESSION['cartItems'][$cartNo]['size'];
@@ -13,6 +15,7 @@
 
     if(isset($_POST['btnRemove'])){
         unset($_SESSION['cartItems'][$cartNo]);
+        $_SESSION['cartCount'] -= 1; // I forgot to put this for subration of cart count every removed an item
         header("Location: cart.php");
     }
     else if (isset($_POST['btnCancel']))

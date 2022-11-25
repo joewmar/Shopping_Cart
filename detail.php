@@ -8,7 +8,7 @@
         $isDuplicate = false;
         // Duplication Process
         foreach($_SESSION['cartItems'] as $key => $value){
-            if(in_array($_GET['pid'], $_SESSION['cartItems'][$key]) && in_array($_POST['radSize'], $_SESSION['cartItems'][$key])){
+            if(in_array($_GET['pid'], $_SESSION['cartItems'][$key]) && in_array($_POST['radSize'], $_SESSION['cartItems'][$key]) && in_array($_GET['pid'], $_SESSION['cartItems'][$key])){
                 $isDuplicate = true;
                 $_SESSION['cartItems'][$CarCount]['qty'] = $_POST['inputQTY'];
                 break;
